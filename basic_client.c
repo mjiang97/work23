@@ -1,16 +1,13 @@
 #include "pipe_networking.h"
 
 int main() {
-    int to_server;
-    int from_server;
-
-    from_server = client_connect( &to_server );
     char line[BUFFER_SIZE];
+    int sd = client_connect();
     while(1) {
         printf("input: ");
         fgets(line, sizeof(line), stdin);
-        write(to_server, line, sizeof(line));
-        read(from_server, line, sizeof(line));
+        write(sd, line, sizeof(line));
+        read(sd, line, sizeof(line));
         printf("response: %s", line);
     }
 }
